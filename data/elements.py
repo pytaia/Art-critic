@@ -113,12 +113,13 @@ def get_individual_number(name):
     return information.get_item(Key={'name': name})['Item']['individual_number']
 
 
-def get_names():
+def get_names(hall=0):
     # получение всех названий
     names = []
     res = information.scan()['Items']
     for i in res:
-        names.append(i['name'])
+        if not hall or i['hall_number'] == '0':
+            names.append(i['name'])
     return names
 
 

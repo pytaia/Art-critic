@@ -6,9 +6,9 @@ import numpy as np
 def graph_art(individual_number):
     # остроение статистики картины
     views, statistic = return_statistics(individual_number)
-    vals = np.array(list(statistic.values())) / views
+    vals = np.array(list(statistic.values()), int) / int(views)
     labels = list(statistic.keys())
     fig, ax = plt.subplots()
     ax.pie(vals, labels=labels)
     ax.axis("equal")
-    fig.savefig('chart.png')
+    fig.savefig('chart.png', dpi=60)
