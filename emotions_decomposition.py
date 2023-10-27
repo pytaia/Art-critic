@@ -1,7 +1,6 @@
 import cv2
 import numpy as np
 from fer import FER
-import matplotlib.pyplot as plt
 from os import getcwd
 
 
