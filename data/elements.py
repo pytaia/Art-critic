@@ -122,7 +122,9 @@ def get_individual_number(name):
 
 
 def get_names():
+    # получение всех названий
     names = []
     res = information.scan()['Items']
     for i in res:
         names.append(i['name'])
+    return names
