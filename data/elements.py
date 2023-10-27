@@ -28,9 +28,8 @@ def hang_art(individual_number, new_hall_number):
                             ExpressionAttributeValues={':val1': new_hall_number})
 
 
-def create_room(size, paintings):
+def create_room(number, size, paintings):
     # создать комнату. передать размер строкой вида 'x,y' и данные о картинах СПИСКОМ
-    number = str(len(rooms.scan()['Items']) + 1)
     for i in paintings:
         hang_art(i[0], number)
     rooms.put_item(Item={
@@ -100,20 +99,12 @@ def return_information(individual_number):
     return information.get_item(Key={'individual_number': individual_number})['Item']
 
 
-
 def return_statistics(individual_number):
     # возвращает статистику картины. номер строкой
     res = statistics.get_item(Key={'individual_number': individual_number})['Item']['emotions'].split(',')
     return {'angry': int(res[0]), 'disgust': int(res[1]), 'fear': int(res[2]),
             'happy': int(res[3]), 'sad': int(res[4]), 'surprise': int(res[5]),
             'neutral': int(res[6])}
-
-
-def return_room_data(number):
-    # возвращает данные комнаты. номер строкой
-    res = rooms.get_item(Key={'number': number})['Item']
-    paintings = [i.split(',') for i in res['paintings'].split(';')]
-    return {'size': [int(i) for i in res['size'].split(',')], 'paintings': paintings}
 
 
 def get_individual_number(name):
@@ -128,3 +119,18 @@ def get_names():
     for i in res:
         names.append(i['name'])
     return names
+
+
+def get_number_rooms():
+    # возвращает номер комнаты
+    return str(len(rooms.scan()['Items']) + 1)
+
+
+def get_roomds():
+    # данные всех комнат
+    room = []
+    res = rooms.scan()['Items']
+    for i in res:
+        room.append([i['number'], [int(j) for j in i['size'].split(',')],
+                     [j.split(',') for j in i['paintings'].split(';')]])
+    return room
