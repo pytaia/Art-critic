@@ -114,3 +114,17 @@ def return_room_data(number):
     res = rooms.get_item(Key={'number': number})['Item']
     paintings = [i.split(',') for i in res['paintings'].split(';')]
     return {'size': [int(i) for i in res['size'].split(',')], 'paintings': paintings}
+
+
+def get_individual_number(name):
+    # получение номера картины по названию
+    return information.get_item(Key={'name': name})['Item']['individual_number']
+
+
+def get_names():
+    # получение всех названий
+    names = []
+    res = information.scan()['Items']
+    for i in res:
+        names.append(i['name'])
+    return names
