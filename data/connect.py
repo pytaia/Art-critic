@@ -1,5 +1,5 @@
 import boto3
-import config
+import data.config as config
 
 database = boto3.resource(
     'dynamodb',

@@ -1,6 +1,6 @@
 from math import gcd
 import numpy as np
-from connect import information, statistics, rooms
+from data.connect import information, statistics, rooms
 
 def create_art(hall_number, author, name, style, width, year_of_creation):
     #создание картины. передать необходимые данные строками
@@ -101,10 +101,11 @@ def return_information(individual_number):
 
 def return_statistics(individual_number):
     # возвращает статистику картины. номер строкой
-    res = statistics.get_item(Key={'individual_number': individual_number})['Item']['emotions'].split(',')
-    return {'angry': int(res[0]), 'disgust': int(res[1]), 'fear': int(res[2]),
-            'happy': int(res[3]), 'sad': int(res[4]), 'surprise': int(res[5]),
-            'neutral': int(res[6])}
+    res1 = statistics.get_item(Key={'individual_number': individual_number})['Item']
+    res = res1['emotions'].split(',')
+    return (res1['views'], {'angry': int(res[0]), 'disgust': int(res[1]), 'fear': int(res[2]),
+                            'happy': int(res[3]), 'sad': int(res[4]), 'surprise': int(res[5]),
+                            'neutral': int(res[6])})
 
 
 def get_individual_number(name):
