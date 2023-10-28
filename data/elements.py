@@ -23,9 +23,10 @@ def create_art(hall_number, author, name, style, width, year_of_creation):
 
 def hang_art(individual_number, new_hall_number):
     # изменить зал картины. передать необходимые данные строками. используется в других функциях
-    information.update_item(Key={'individual_number': individual_number},
-                            UpdateExpression='SET hall_number = :val1',
-                            ExpressionAttributeValues={':val1': new_hall_number})
+    if individual_number != '':
+        information.update_item(Key={'individual_number': individual_number},
+                                UpdateExpression='SET hall_number = :val1',
+                                ExpressionAttributeValues={':val1': new_hall_number})
 
 
 def create_room(number, size, paintings):
@@ -119,9 +120,8 @@ def get_names(hall=0):
     # получение всех названий
     names = []
     res = information.scan()['Items']
-    print()
     for i in res:
-        if hall == 0 or i['hall_number'] == '0':
+        if (hall == 0 or i['hall_number'] == '0') and i['individual_number'] != '':
             names.append(i['name'])
     return names
 
@@ -143,3 +143,9 @@ def get_rooms(number):
     for i in res:
         s.append([res['number'], [int(j) for j in res['size'].split(',')], [j.split(',') for j in res['paintings'].split(';')]])
     return s
+
+
+def get_room(number):
+    # данные комнаты
+    res = rooms.get_item(Key={'number': number})['Item']
+    return [res['number'], [int(j) for j in res['size'].split(',')], [j.split(',') for j in res['paintings'].split(';')]]
