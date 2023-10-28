@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>378</width>
-    <height>525</height>
+    <height>486</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -57,7 +57,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>440</y>
+      <y>400</y>
       <width>351</width>
       <height>31</height>
      </rect>
@@ -87,19 +87,6 @@
     </property>
     <property name="text">
      <string>Создать комнату</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="edit_room_btn">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>400</y>
-      <width>351</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Редактировать комнату</string>
     </property>
    </widget>
    <widget class="QComboBox" name="name_art">

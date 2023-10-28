@@ -2,7 +2,7 @@ from data.elements import *
 from graph import graph_art
 import sys
 from PyQt5 import uic
-from PyQt5.QtGui import QPainter, QColor
+import pygame
 from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow
 from PyQt5.QtGui import QPixmap
 from PyQt5 import QtCore, QtWidgets
@@ -27,6 +27,7 @@ class MyWidget(QMainWindow):
         self.del_art_btn.clicked.connect(self.del_art)
         self.del_room_btn.clicked.connect(self.del_room)
         self.pushButton.clicked.connect(self.initUI)
+        self.sim_btn.clicked.connect(self.sim)
 
     def initUI(self):
         res = get_names()
@@ -42,10 +43,13 @@ class MyWidget(QMainWindow):
         self.add_art = CreatArt(self)
         self.add_art.show()
 
+    def sim(self):
+        # pygame
+        pass
 
     def creat_room(self):
-        self.add_room = CreatRoom(self)
-        self.add_room.show()
+        # pygame
+        pass
 
     def stat_art(self):
         self.stat = StatArt(self, self.name_art.currentText())
@@ -74,39 +78,7 @@ class CreatArt(QWidget):
             create_art(*res)
             self.close()
         else:
-            self.name_line.setText('Некорректный ввод. Проверьте все поля еще раз')
-
-
-
-class CreatRoom(QWidget):
-    def __init__(self, *args):
-        super().__init__()
-        self.args = args[-1]
-        uic.loadUi('creat_room_ui.ui', self)
-        self.x = 300
-        self.y = 300
-        self.p = False
-
-    def creat(self):
-        x = self.size_x.value()
-        y = self.size_y.value()
-        if x >= y:
-            x = 300
-            y = int((300 * x) / y)
-        else:
-            y = 300
-            x = int((300 * y) / x)
-        self.x, self.y = x, y
-        self.p == True
-        painter = QPainter(self)
-        painter.setPen(QColor(0, 0, 222))
-        painter.drawRect(50, 40, self.x, self.y)
-
-
-    def paintEvent(self, e):
-            painter = QPainter(self)
-            painter.setPen(QColor(0, 0, 222))
-            painter.drawRect(50, 40, self.x, self.y)
+            self.name_line.setText('Некорректный ввод.')
 
 
 class StatArt(QWidget):

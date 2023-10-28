@@ -40,18 +40,6 @@ def create_room(number, size, paintings):
     })
 
 
-def edit_room(number, new_paintings):
-    # редактирование комнаты. номер комнаты строкой, данные картин СПИСКОМ
-    res = get_room(number)['paintings']
-    for i in filter(lambda x: x[0] not in [j[0] for j in res], new_paintings):
-        hang_art(i[0], number)
-    for i in filter(lambda x: x[0] not in [j[0] for j in new_paintings], res):
-        hang_art(i[0], new_hall_number='0')
-    rooms.update_item(Key={'number': number},
-                      UpdateExpression='SET paintings = :val1',
-                      ExpressionAttributeValues={':val1': list_in_str(new_paintings)})
-
-
 def delete_room(number):
     # удаление комнаты. номер строкой
     res = rooms.get_item(Key={'number': number})['Item']['paintings']
