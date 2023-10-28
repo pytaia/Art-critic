@@ -2,6 +2,7 @@ from data.elements import *
 from graph import graph_art
 import sys
 from PyQt5 import uic
+from PyQt5.QtGui import QPainter, QColor
 from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow
 from PyQt5.QtGui import QPixmap
 from PyQt5 import QtCore, QtWidgets
@@ -39,6 +40,7 @@ class MyWidget(QMainWindow):
         self.add_art = CreatArt(self)
         self.add_art.show()
 
+
     def creat_room(self):
         self.add_room = CreatRoom(self)
         self.add_room.show()
@@ -75,6 +77,11 @@ class CreatRoom(QWidget):
         super().__init__()
         self.args = args[-1]
         uic.loadUi('creat_room_ui.ui', self)
+
+    def paintEvent(self, e):
+        painter = QPainter(self)
+        painter.setPen(QColor(0, 0, 222))
+        painter.drawRect(50, 40, 300, 300)
 
 
 class StatArt(QWidget):
