@@ -57,6 +57,17 @@ class CreatArt(QWidget):
         super().__init__()
         self.args = args[-1]
         uic.loadUi('creat_art_ui.ui', self)
+        self.creat_btn.clicked.connect(self.creat)
+
+    def creat(self):
+        res = [self.hall_line.text(), self.author_line.text(), self.name_line.text(),
+               self.style_line.text(), self.x_line.text(), self.year_line.text()]
+        if '' not in res and res[4].isdigit() and res[0].isdigit():
+            create_art(*res)
+            self.close()
+        else:
+            self.name_line.setText('Некорректный ввод. Проверьте все поля еще раз')
+
 
 
 class CreatRoom(QWidget):

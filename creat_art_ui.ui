@@ -103,7 +103,7 @@
     <string>Название:</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit">
+  <widget class="QLineEdit" name="hall_line">
    <property name="geometry">
     <rect>
      <x>250</x>
@@ -146,7 +146,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QLineEdit" name="id_line">
+  <widget class="QLineEdit" name="x_line">
    <property name="geometry">
     <rect>
      <x>250</x>
@@ -169,7 +169,7 @@
     <string>Стиль:</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="creat_btn">
    <property name="geometry">
     <rect>
      <x>10</x>
