@@ -106,10 +106,10 @@
     </rect>
    </property>
    <property name="text">
-    <string>Висит в зале (0 если не выставлена):</string>
+    <string>Висит в зале (иначе 0):</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit">
+  <widget class="QLineEdit" name="hall_line">
    <property name="geometry">
     <rect>
      <x>640</x>
@@ -167,6 +167,19 @@
      <width>251</width>
      <height>31</height>
     </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="image">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>38</width>
+     <height>291</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
    </property>
   </widget>
  </widget>

@@ -16,8 +16,8 @@ def create_art(hall_number, author, name, style, width, year_of_creation):
     })
     statistics.put_item(Item={
         'individual_number': individual_number,
-        'views': '0',
-        'emotions': '0,0,0,0,0,0,0'
+        'views': '1',
+        'emotions': '1,1,1,1,1,1,1'
     })
 
 
@@ -103,14 +103,16 @@ def return_statistics(individual_number):
     # возвращает статистику картины. номер строкой
     res1 = statistics.get_item(Key={'individual_number': individual_number})['Item']
     res = res1['emotions'].split(',')
-    return (res1['views'], {'angry': int(res[0]), 'disgust': int(res[1]), 'fear': int(res[2]),
-                            'happy': int(res[3]), 'sad': int(res[4]), 'surprise': int(res[5]),
-                            'neutral': int(res[6])})
+    return (res1['views'], {'злость': int(res[0]), 'отвращение': int(res[1]), 'страх': int(res[2]),
+                            'счастье': int(res[3]), 'грусть': int(res[4]), 'удивление': int(res[5]),
+                            'нейтральный': int(res[6])})
 
 
 def get_individual_number(name):
     # получение номера картины по названию
-    return information.get_item(Key={'name': name})['Item']['individual_number']
+    for i in information.scan()['Items']:
+        if i['name'] == name:
+            return i['individual_number']
 
 
 def get_names(hall=0):
@@ -128,11 +130,13 @@ def get_number_rooms():
     return str(len(rooms.scan()['Items']) + 1)
 
 
-def get_roomds():
-    # данные всех комнат
-    room = []
-    res = rooms.scan()['Items']
-    for i in res:
-        room.append([i['number'], [int(j) for j in i['size'].split(',')],
-                     [j.split(',') for j in i['paintings'].split(';')]])
-    return room
+def get_numbers_rooms():
+    # номера всех комнат
+    return [i['number'] for i in rooms.scan()['Items']]
+
+
+def get_room(number):
+    # данные комнаты
+    res = rooms.get_item(Key={'number': number})['Item']
+    return [res['number'], [int(j) for j in res['size'].split(',')],
+            [j.split(',') for j in res['paintings'].split(';')]]
