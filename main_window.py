@@ -25,9 +25,11 @@ class MyWidget(QMainWindow):
         self.creat_room_btn.clicked.connect(self.creat_room)
         self.stat_btn.clicked.connect(self.stat_art)
         self.del_art_btn.clicked.connect(self.del_art)
+        self.del_room_btn.clicked.connect(self.del_room)
+        self.pushButton.clicked.connect(self.initUI)
 
     def initUI(self):
-        res = get_names(0)
+        res = get_names()
         self.name_art.clear()
         self.room.clear()
         for i in res:
@@ -51,6 +53,10 @@ class MyWidget(QMainWindow):
 
     def del_art(self):
         delete_art(get_individual_number(self.name_art.currentText()))
+        self.initUI()
+
+    def del_room(self):
+        delete_room(self.room.currentText())
         self.initUI()
 
 
@@ -77,11 +83,30 @@ class CreatRoom(QWidget):
         super().__init__()
         self.args = args[-1]
         uic.loadUi('creat_room_ui.ui', self)
+        self.x = 300
+        self.y = 300
+        self.p = False
 
-    def paintEvent(self, e):
+    def creat(self):
+        x = self.size_x.value()
+        y = self.size_y.value()
+        if x >= y:
+            x = 300
+            y = int((300 * x) / y)
+        else:
+            y = 300
+            x = int((300 * y) / x)
+        self.x, self.y = x, y
+        self.p == True
         painter = QPainter(self)
         painter.setPen(QColor(0, 0, 222))
-        painter.drawRect(50, 40, 300, 300)
+        painter.drawRect(50, 40, self.x, self.y)
+
+
+    def paintEvent(self, e):
+            painter = QPainter(self)
+            painter.setPen(QColor(0, 0, 222))
+            painter.drawRect(50, 40, self.x, self.y)
 
 
 class StatArt(QWidget):

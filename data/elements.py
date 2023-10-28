@@ -41,7 +41,7 @@ def create_room(number, size, paintings):
 
 def edit_room(number, new_paintings):
     # редактирование комнаты. номер комнаты строкой, данные картин СПИСКОМ
-    res = return_room_data(number)['paintings']
+    res = get_room(number)['paintings']
     for i in filter(lambda x: x[0] not in [j[0] for j in res], new_paintings):
         hang_art(i[0], number)
     for i in filter(lambda x: x[0] not in [j[0] for j in new_paintings], res):
@@ -119,8 +119,9 @@ def get_names(hall=0):
     # получение всех названий
     names = []
     res = information.scan()['Items']
+    print()
     for i in res:
-        if not hall or i['hall_number'] == '0':
+        if hall == 0 or i['hall_number'] == '0':
             names.append(i['name'])
     return names
 
@@ -135,8 +136,10 @@ def get_numbers_rooms():
     return [i['number'] for i in rooms.scan()['Items']]
 
 
-def get_room(number):
+def get_rooms(number):
     # данные комнаты
-    res = rooms.get_item(Key={'number': number})['Item']
-    return [res['number'], [int(j) for j in res['size'].split(',')],
-            [j.split(',') for j in res['paintings'].split(';')]]
+    res = rooms.scan()['Item']
+    s = []
+    for i in res:
+        s.append([res['number'], [int(j) for j in res['size'].split(',')], [j.split(',') for j in res['paintings'].split(';')]])
+    return s

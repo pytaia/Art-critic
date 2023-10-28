@@ -161,6 +161,19 @@
      <string>Art Critic</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>0</y>
+      <width>81</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>перезагрузка</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -168,7 +181,7 @@
      <x>0</x>
      <y>0</y>
      <width>378</width>
-     <height>18</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>
