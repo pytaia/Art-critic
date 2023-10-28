@@ -136,7 +136,7 @@ def get_numbers_rooms():
     return [i['number'] for i in rooms.scan()['Items']]
 
 
-def get_rooms(number):
+def get_rooms():
     # данные комнаты
     res = rooms.scan()['Item']
     s = []
